@@ -27,7 +27,7 @@ class Url extends Model
 
     protected $hidden = ['deleted_at'];
 
-    protected $appends = ['code'];
+    protected $appends = ['short_link'];
 
     /**
      * @return bool
@@ -40,10 +40,10 @@ class Url extends Model
     /**
      * @return string|null
      */
-    public function getCodeAttribute(): ?string
+    public function getShortLinkAttribute(): ?string
     {
         if ($this->id) {
-            return app(DecoderInterface::class)->encode($this->id);
+            return config('app.url') . '/' . app(DecoderInterface::class)->encode($this->id);
         }
 
         return null;

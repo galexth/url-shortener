@@ -46,6 +46,15 @@ services:
       - ./dockerfiles/nginx:/etc/nginx/conf.d
     networks:
       - urls
+  node:
+    image: node
+    restart: "no"
+    container_name: urls-node
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    networks:
+      - urls
 networks:
   urls:
     driver: bridge

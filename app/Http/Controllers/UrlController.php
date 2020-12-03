@@ -22,14 +22,12 @@ class UrlController extends Controller
     {
         $this->validate($request, [
             'url' => 'required|url',
-            'expires_at' => 'date|after:now',
+            'expires_at' => 'nullable|date|after:now',
         ]);
 
-        if ($url = $repository->findByUrl($request->input('url'))) {
-            return response(['error' => 'Url already exists.'], 422);
+        if (! $url = $repository->findByUrl($request->input('url'))) {
+            $url = $repository->create($request->input());
         }
-
-        $url = $repository->create($request->input());
 
         return response($url, $url->wasRecentlyCreated ? 201 : 200);
     }
