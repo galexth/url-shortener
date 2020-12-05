@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel</title>
     <!-- Styles -->
-    <link href="{{ asset('frontend/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 <div id="root"></div>
 
 <!-- React JS -->
-<script src="{{ asset('frontend/js/app.js') }}" defer></script>
+<script src="{{ asset('admin/js/app.js') }}" defer></script>
 
 </body>
 </html>

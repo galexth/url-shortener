@@ -24,7 +24,8 @@ class UrlFactory extends Factory
     {
         return [
             'url' => $this->faker->url,
-            'expires_at' => $this->faker->boolean
+            'hits' => rand(0, 50),
+            'expires_at' => rand(0, 2)
                 ? Carbon::now()->addMinutes($this->faker->randomNumber(4))
                 : null,
         ];

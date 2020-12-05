@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('main');
 });
 
+Route::get('/admin/urls', function () {
+    return view('admin');
+});
+
 Route::get('/{code}', [RedirectController::class, 'forward']);

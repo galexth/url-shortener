@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         Url::query()->truncate();
 
-        Url::factory(50)->create();
+        Url::factory(500)->create();
     }
 }

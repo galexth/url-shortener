@@ -15,4 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('urls', UrlController::class)
-    ->only(['index', 'store', 'destroy']);
+    ->only(['store', 'destroy']);
+
+Route::post('urls/search', [UrlController::class, 'index']);

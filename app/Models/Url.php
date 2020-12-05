@@ -14,6 +14,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @mixin \Eloquent
+ *
+ * magic
+ *
+ * @property string $short_code
+ * @property string $short_link
  */
 class Url extends Model
 {
@@ -27,7 +32,7 @@ class Url extends Model
 
     protected $hidden = ['deleted_at'];
 
-    protected $appends = ['short_link'];
+    protected $appends = ['short_code', 'short_link'];
 
     /**
      * @return bool
@@ -37,15 +42,24 @@ class Url extends Model
         return $this->expires_at && $this->expires_at->isPast();
     }
 
+    public function getCode()
+    {
+        return $this->id ? app(DecoderInterface::class)->encode($this->id) : null;
+    }
+
     /**
      * @return string|null
      */
     public function getShortLinkAttribute(): ?string
     {
-        if ($this->id) {
-            return config('app.url') . '/' . app(DecoderInterface::class)->encode($this->id);
-        }
+        return $this->id ? (config('app.url') . '/' . $this->getCode()) : null;
+    }
 
-        return null;
+    /**
+     * @return string|null
+     */
+    public function getShortCodeAttribute(): ?string
+    {
+        return $this->getCode();
     }
 }

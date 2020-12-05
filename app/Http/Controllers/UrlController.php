@@ -2,23 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\UrlRepository;
+use App\Repositories\UrlRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class UrlController extends Controller
 {
-    public function index(Request $request, UrlRepository $repository): Response
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Repositories\UrlRepositoryInterface $repository
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request, UrlRepositoryInterface $repository): Response
     {
         $collection = $repository->find(
-            $request->input('filter', []),
-            $request->input('sort', [])
-        )->get();
+            $request->input('filters', []),
+            $request->input('sortBy', [])
+        )
+        ->paginate($request->input('pageSize'));
 
         return response($collection);
     }
 
-    public function store(Request $request, UrlRepository $repository): Response
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Repositories\UrlRepositoryInterface $repository
+     *
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function store(Request $request, UrlRepositoryInterface $repository): Response
     {
         $this->validate($request, [
             'url' => 'required|url',
@@ -32,12 +46,18 @@ class UrlController extends Controller
         return response($url, $url->wasRecentlyCreated ? 201 : 200);
     }
 
-    public function destroy($id, UrlRepository $repository): Response
+    /**
+     * @param $id
+     * @param \App\Repositories\UrlRepositoryInterface $repository
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, UrlRepositoryInterface $repository): Response
     {
         if (! $url = $repository->findById($id)) {
-            return response(['error' => 'Url not found.'], 410);
+            return response(['error' => 'Model not found.'], 404);
         }
 
-        return response(['deleted' => $url->delete()]);
+        return response(['deleted' => $repository->delete($url)]);
     }
 }

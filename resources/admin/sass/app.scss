@@ -1,0 +1,21 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.table thead th {
+    text-align: center;
+}
+
+.table .form-control {
+    height: 25px;
+    padding: 4px;
+}
+
+.table td, .table th {
+    vertical-align: middle !important;
+}
