@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class UrlRepository implements UrlRepositoryInterface
 {
-    protected DecoderInterface $decoder;
+    private DecoderInterface $decoder;
 
     private Url $model;
 
@@ -22,9 +22,9 @@ class UrlRepository implements UrlRepositoryInterface
      * @param \App\Components\Decoder\DecoderInterface $decoder
      * @param bool $useCache
      */
-    public function __construct(DecoderInterface $decoder, bool $useCache = true)
+    public function __construct(Url $url, DecoderInterface $decoder, bool $useCache = true)
     {
-        $this->model = new Url();
+        $this->model = $url;
         $this->decoder = $decoder;
         $this->useCache = $useCache;
     }
@@ -36,7 +36,7 @@ class UrlRepository implements UrlRepositoryInterface
      */
     public function findById(int $id): ?Url
     {
-        return Url::query()->find($id);
+        return $this->model->query()->find($id);
     }
 
     /**
@@ -67,7 +67,7 @@ class UrlRepository implements UrlRepositoryInterface
      */
     public function findByUrl(string $url, bool $expired = false): ?Url
     {
-        $query = Url::query()->where('url', $url);
+        $query = $this->model->query()->where('url', $url);
 
         if ($expired) {
             $query->where('expires_at', '>', Carbon::now());
@@ -84,7 +84,7 @@ class UrlRepository implements UrlRepositoryInterface
      */
     public function find(array $filter = [], array $sort = []): Builder
     {
-        $query = Url::query();
+        $query = $this->model->query();
 
         if (! empty($filter['short_code'])) {
             $id = $this->decoder->decode($filter['short_code']);
@@ -124,6 +124,6 @@ class UrlRepository implements UrlRepositoryInterface
      */
     public function create(array $data): Url
     {
-        return Url::query()->create($data);
+        return $this->model->query()->create($data);
     }
 }

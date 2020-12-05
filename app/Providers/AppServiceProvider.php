@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Components\Decoder\Decoder;
 use App\Components\Decoder\DecoderInterface;
+use App\Models\Url;
 use App\Repositories\UrlRepository;
 use App\Repositories\UrlRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(UrlRepositoryInterface::class, function ($app) {
-            return new UrlRepository(app(DecoderInterface::class));
+            return new UrlRepository(new Url(), app(DecoderInterface::class));
         });
     }
 
