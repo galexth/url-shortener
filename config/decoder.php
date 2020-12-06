@@ -2,6 +2,6 @@
 
 return [
 
-    'index' => env('DECODER_INDEX', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),
+    'index' => env('DECODER_INDEX', 'bcdefghijklmnopqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'),
 
 ];
