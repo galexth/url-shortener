@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from "moment";
 
 const Form = styled.form`
     display: block;
@@ -8,8 +7,6 @@ const Form = styled.form`
 `;
 
 export default (props) => {
-    const defaultExpiration = moment().add(1, 'w');
-
     return (
         <Form {...props} >
             <div className="form-group">
@@ -24,7 +21,7 @@ export default (props) => {
                     id="expires_at"
                     name="expires_at"
                     placeholder="Valid until..."
-                    defaultValue={defaultExpiration.format('YYYY-MM-DD')}
+                    defaultValue={null}
                 />
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
