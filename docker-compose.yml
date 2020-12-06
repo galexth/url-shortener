@@ -44,7 +44,7 @@ services:
     networks:
       - laravel
   node:
-    image: node
+    image: node:15
     restart: "no"
     container_name: node
     volumes:

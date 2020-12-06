@@ -8,6 +8,8 @@ sh init.sh
 
 #### [List](http://localhost:8000/admin/urls) (http://localhost:8000/admin/urls)
 
+#### [Usage](http://localhost:8000) (http://localhost:8000/{some_code_like_bx})
+
 config/decoder.php
 
 ```php
@@ -29,6 +31,6 @@ return [
 #### To run some tests
 
 ```shell
-php artisan test
+docker-compose exec php php artisan test
 ```
 

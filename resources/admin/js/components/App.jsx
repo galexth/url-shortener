@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useMemo } from 'react';
-import ReactDOM from 'react-dom';
 import {NotificationManager, NotificationContainer} from "react-notifications";
 import Moment from "react-moment";
 import {truncate} from 'lodash';
@@ -62,7 +61,7 @@ function App() {
                     width: '185px',
                 },
                 Cell: ({value}) => {
-                    return (value && <Moment format="DD-MM-YYYY HH:mm:SS">{value}</Moment>);
+                    return (value && <Moment format="DD-MM-YYYY">{value}</Moment>);
                 },
                 disableFilters: true,
             },
