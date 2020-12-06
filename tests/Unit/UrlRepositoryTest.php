@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\Components\Decoder\DecoderInterface;
 use App\Models\Url;
 use App\Repositories\UrlRepository;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
@@ -126,5 +127,22 @@ class UrlRepositoryTest extends TestCase
         Cache::shouldReceive('forget')->andReturnTrue();
 
         $this->assertEquals(true, $this->repository->delete($this->model));
+    }
+
+    public function testCreate()
+    {
+        $data = [
+            'url' => 'http://url',
+            'expires_at' => Carbon::now(),
+        ];
+
+        $url = new Url($data);
+
+        $this->model
+            ->shouldReceive('query->create')
+            ->with($data)
+            ->andReturn($url);
+
+        $this->assertEquals($url, $this->repository->create($data));
     }
 }
