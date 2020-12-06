@@ -62,4 +62,13 @@ class Url extends Model
     {
         return $this->getCode();
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (self $model) {
+            $model->url = strtolower($model->url);
+        });
+    }
 }

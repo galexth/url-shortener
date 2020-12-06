@@ -35,7 +35,7 @@ class UrlController extends Controller
     public function store(Request $request, UrlRepositoryInterface $repository): Response
     {
         $this->validate($request, [
-            'url' => 'required|blacklist|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/',
+            'url' => 'required|blacklist|regex:/^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i',
             'expires_at' => 'nullable|date|after:now',
         ], [
             'blacklist' => 'The url is blacklisted.'

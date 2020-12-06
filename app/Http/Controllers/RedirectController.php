@@ -27,6 +27,6 @@ class RedirectController extends Controller
 
         $url->increment('hits');
 
-        return redirect($url->url, 302);
+        return redirect()->away($url->url);
     }
 }

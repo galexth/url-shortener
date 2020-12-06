@@ -15,12 +15,18 @@ function App() {
     const submit = (e) => {
         e.preventDefault();
 
+        let urlValue = e.target.url.value;
+
+        if (urlValue && ! urlValue.match(/^https?:\/\//i)) {
+            urlValue = 'http://' + urlValue;
+        }
+
         setLoading(true);
         setErrors({});
         setUrl({});
 
         api.store({
-            url: e.target.url.value,
+            url: urlValue,
             expires_at: e.target.expires_at.value || null,
         })
             .then(({data}) => setUrl(data))

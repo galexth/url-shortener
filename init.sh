@@ -16,6 +16,6 @@ docker-compose exec php php artisan db:seed
 
 sleep 5
 
-docker-compose run --rm node npm install
+docker-compose run --rm node yarn
 
 docker-compose run --rm node npm run development
