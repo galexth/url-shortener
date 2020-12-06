@@ -1,8 +1,10 @@
 /node_modules
 /public/hot
 /public/storage
-/public/js
-/public/css
+/public/frontend/js
+/public/frontend/css
+/public/admin/js
+/public/admin/css
 /public/fonts
 /public/mix-manifest.json
 /storage/*.key
