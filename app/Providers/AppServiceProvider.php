@@ -7,6 +7,7 @@ use App\Components\Decoder\DecoderInterface;
 use App\Models\Url;
 use App\Repositories\UrlRepository;
 use App\Repositories\UrlRepositoryInterface;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Validator::extend('blacklist', function($attribute, $value, $parameters, $validator) {
+            foreach (config('blacklist.rules') as $item) {
+                if (preg_match("/{$item}/i", $value)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
     }
 }
