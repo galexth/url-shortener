@@ -98,12 +98,11 @@ These are the things that we will be looking at when we review your test
 ```shell
 sh init.sh
 ```
+#### [Add some links](http://localhost:8010) (http://localhost:8010)
 
-#### [Form](http://localhost:8000) (http://localhost:8000)
+#### Follow them http://localhost:8010/{some_code_like_bx}
 
-#### [List](http://localhost:8000/admin/urls) (http://localhost:8000/admin/urls)
-
-#### [Usage](http://localhost:8000) (http://localhost:8000/{some_code_like_bx})
+#### [All created short codes](http://localhost:8010/admin/urls) (http://localhost:8010/admin/urls)
 
 **config/decoder.php**
 
